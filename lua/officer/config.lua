@@ -1,27 +1,43 @@
 local M = {}
 
 ---@class DispatchOverseer.Config
----@field base_components table|fun(params: table): table
----@field additional_components table|fun(params: table): table
+---@field use_base_components boolean
+---@field components table|fun(params: table): table
 ---@field create_mappings boolean
 ---@field create_commands boolean
 
 ---@class DispatchOverseer.ConfigParam
----@field base_components? table|fun(params: table): table
----@field additional_components? table|fun(params: table): table
+---@field use_base_components? boolean
+---@field components? table|fun(params: table): table
 ---@field create_mappings? boolean
 ---@field create_commands? boolean
 
+---@param params table
+---@return table
+local function base_components(params)
+  return {
+    {
+      "on_output_quickfix",
+      errorformat = vim.o.efm,
+      open_on_match = not params.bang,
+      tail = false,
+      open_height = 8,
+      close = true
+    },
+    {
+      "officer.open_on_start",
+      modifier = "botright vertical",
+      close_on_exit = params.bang and "always" or "never",
+      size = function() return vim.o.columns * 0.4 end
+    },
+    "on_exit_set_status",
+  }
+end
+
 ---@type DispatchOverseer.Config
 local config = {
-  base_components = function(params)
-    return {
-      { "on_output_quickfix", errorformat = vim.o.efm, open_on_match = not params.bang, tail = false, open_height = 8, close = true },
-      { "officer.open_on_start", modifier = "botright vertical", close_on_exit = params.bang and "always" or "never", size = function() return vim.o.columns * 0.4 end },
-      "on_exit_set_status",
-    }
-  end,
-  additional_components = {},
+  use_base_components = true,
+  components = {},
   create_mappings = false,
   create_commands = true,
 }
@@ -86,10 +102,9 @@ end
 
 ---@param params table
 function M.get_components(params)
-  local components = config.base_components
-  if type(components) == "function" then components = components(params) end
+  local components = config.use_base_components and base_components(params) or {}
 
-  local additional_components = config.additional_components
+  local additional_components = config.components
   if type(additional_components) == "function" then
     additional_components = additional_components(params)
   end
