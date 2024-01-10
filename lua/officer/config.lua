@@ -76,7 +76,6 @@ function M.setup_commands()
 end
 
 function M.setup_mappings()
-  local overseer = require("overseer")
   vim.keymap.set("n", "m<SPACE>", ":Make<SPACE>")
   vim.keymap.set("n", "m<CR>", ":Make<CR>")
   vim.keymap.set("n", "m!", ":Make!<SPACE>")
