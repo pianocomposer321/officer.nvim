@@ -84,4 +84,21 @@ function M.setup_mappings()
   vim.keymap.set("n", "M!", ":Run!<SPACE>")
 end
 
+---@param params table
+function M.get_components(params)
+  local components = config.base_components
+  if type(components) == "function" then components = components(params) end
+
+  local additional_components = config.additional_components
+  if type(additional_components) == "function" then
+    additional_components = additional_components(params)
+  end
+
+  for _, comp in ipairs(additional_components) do
+    table.insert(components, comp)
+  end
+
+  return components
+end
+
 return M
