@@ -14,6 +14,6 @@ function M.spawn_cmd(cmd, params)
   task:start()
 end
 
-M.setup = require("officer.config").setup
+M.setup = config.setup
 
 return M
