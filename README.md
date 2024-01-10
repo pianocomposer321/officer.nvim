@@ -11,11 +11,16 @@ Officer does not aim to be a drop-in replacment for dispatch however. In particu
 although there are equivalents of both the `:Make` and `:Start` commands (`:Make` and `:Run`),
 there is no equivalent of the `:Dispatch` command, and at this point I do not plan to add it.
 
-Officer uses [overseer.nvim](https://github.com/stevearc/overseer.nvim) to run tasks under the hood. This means that it benefits from
-overseer's task management utilities (such as the task list) and modularity. You can customize
-the behavior of tasks started from officer by changing the components that are added to
-the overseer tasks. For more on this see the [configuration](#config) section, and also
-read overseer.nvim's documentation.
+Officer uses [overseer.nvim](https://github.com/stevearc/overseer.nvim) to run
+tasks under the hood. This means that it benefits from overseer's task
+management utilities (such as the task list) and modularity. You can customize
+the behavior of tasks started from officer by changing the components that are
+added to the overseer tasks. For more on this see the [configuration](#config)
+section, and also read overseer.nvim's documentation.
+
+The idea is that you can do things "the vim way" (using `:h :compiler` and `:h
+makeprg` to compile your program) without having to sacrifice the modern
+convienineces of neovim's lua ecosystem.
 
 ## Setup
 
