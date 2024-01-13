@@ -2,6 +2,8 @@ local config = require("officer.config")
 
 local M = {}
 
+---@param cmd string
+---@param params table
 function M.spawn_cmd(cmd, params)
   local overseer = require("overseer")
 

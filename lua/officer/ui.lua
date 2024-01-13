@@ -14,6 +14,7 @@ function M.resize_windows_on_stack()
   end
 end
 
+---@param bufnr number
 function M.add_window_to_stack(bufnr)
   local last_window = stack[#stack]
   if not last_window or not vim.api.nvim_win_is_valid(last_window.winid) then
@@ -25,17 +26,24 @@ function M.add_window_to_stack(bufnr)
   M.resize_windows_on_stack()
 end
 
+---@param bufnr number
 local function get_position_on_stack(bufnr)
   for ind, window in ipairs(stack) do
     if window.bufnr == bufnr then return ind end
   end
 end
 
+---@param bufnr number
 function M.get_winid(bufnr)
   local window = stack[get_position_on_stack(bufnr)]
   if window then return window.winid end
 end
 
+---@alias size string|number
+
+---@param bufnr number
+---@param modifier string
+---@param size? size|fun():size
 function M.create_window(bufnr, modifier, size)
   if size == nil
     then size = ""
@@ -68,6 +76,7 @@ function M.create_window(bufnr, modifier, size)
   })
 end
 
+---@param bufnr number
 function M.close_window(bufnr)
   local winid = M.get_winid(bufnr)
   if not winid then

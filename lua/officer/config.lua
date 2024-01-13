@@ -15,7 +15,6 @@ local M = {}
 ---@field strategy? string|table
 
 ---@param params table
----@return table
 local function base_components(params)
   return {
     {
@@ -48,6 +47,7 @@ local config = {
 ---@type DispatchOverseer.Config
 M.config = setmetatable({}, { __index = function(_, key) return config[key] end })
 
+---@param key string
 M.get_config_value = function(key)
   return config[key]
 end
