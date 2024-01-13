@@ -5,12 +5,14 @@ local M = {}
 ---@field components table|fun(params: table): table
 ---@field create_mappings boolean
 ---@field create_commands boolean
+---@field strategy? string|table
 
 ---@class DispatchOverseer.ConfigParam
 ---@field use_base_components? boolean
 ---@field components? table|fun(params: table): table
 ---@field create_mappings? boolean
 ---@field create_commands? boolean
+---@field strategy? string|table
 
 ---@param params table
 ---@return table

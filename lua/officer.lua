@@ -10,6 +10,7 @@ function M.spawn_cmd(cmd, params)
   local task = overseer.new_task({
     cmd = cmd,
     components = components,
+    strategy = config.config.strategy
   })
   task:start()
 end
