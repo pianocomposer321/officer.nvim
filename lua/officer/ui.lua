@@ -6,7 +6,7 @@ local M = {}
 
 local get_size = function() return vim.o.columns * 0.4 end
 
-M.resize_windows_on_stack = function()
+function M.resize_windows_on_stack()
   local count_windows = #stack
   local each_height = math.floor(vim.o.lines / count_windows)
   for _, window in ipairs(stack) do
@@ -14,7 +14,7 @@ M.resize_windows_on_stack = function()
   end
 end
 
-M.add_window_to_stack = function(bufnr)
+function M.add_window_to_stack(bufnr)
   local last_window = stack[#stack]
   if not last_window or not vim.api.nvim_win_is_valid(last_window.winid) then
     M.create_window(bufnr, "botright vertical", get_size())
@@ -31,12 +31,12 @@ local function get_position_on_stack(bufnr)
   end
 end
 
-M.get_winid = function(bufnr)
+function M.get_winid(bufnr)
   local window = stack[get_position_on_stack(bufnr)]
   if window then return window.winid end
 end
 
-M.create_window = function(bufnr, modifier, size)
+function M.create_window(bufnr, modifier, size)
   if size == nil
     then size = ""
   elseif type(size) == "function"
@@ -68,7 +68,7 @@ M.create_window = function(bufnr, modifier, size)
   })
 end
 
-M.close_window = function(bufnr)
+function M.close_window(bufnr)
   local winid = M.get_winid(bufnr)
   if not winid then
     return false
