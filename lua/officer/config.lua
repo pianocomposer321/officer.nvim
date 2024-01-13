@@ -48,12 +48,12 @@ local config = {
 M.config = setmetatable({}, { __index = function(_, key) return config[key] end })
 
 ---@param key string
-M.get_config_value = function(key)
+function M.get_config_value(key)
   return config[key]
 end
 
 ---@param user_config? DispatchOverseer.ConfigParam
-M.setup = function(user_config)
+function M.setup(user_config)
   config = vim.tbl_extend("force", config, user_config or {})
   if config.create_commands then
     M.setup_commands()
