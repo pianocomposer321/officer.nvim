@@ -4,7 +4,7 @@ local augroup = vim.api.nvim_create_augroup("officer_open_on_start", {})
 
 local M = {}
 
-local get_size = function() return vim.o.columns * 0.4 end
+local function get_size() return vim.o.columns * 0.4 end
 
 function M.resize_windows_on_stack()
   local count_windows = #stack
