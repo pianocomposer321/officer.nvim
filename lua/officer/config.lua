@@ -45,6 +45,7 @@ local config = {
   create_commands = true,
 }
 
+---@type DispatchOverseer.Config
 M.config = setmetatable({}, { __index = function(_, key) return config[key] end })
 
 M.get_config_value = function(key)
