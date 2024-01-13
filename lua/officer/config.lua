@@ -30,6 +30,7 @@ local function base_components(params)
       close_on_exit = params.bang and "always" or "never",
       size = function() return vim.o.columns * 0.4 end
     },
+    { "unique", replace = false, },
     "on_exit_set_status",
   }
 end
