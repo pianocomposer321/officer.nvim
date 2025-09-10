@@ -26,7 +26,13 @@ return {
         self.bufnr = task:get_bufnr()
         oui.add_window_to_stack(self.bufnr)
         vim.api.nvim_win_set_buf(0, self.bufnr)
-        require("overseer.util").scroll_to_end(0)
+
+        -- vim.api.nvim_feedkeys("G", "n", false)
+
+        local lines = vim.api.nvim_buf_line_count(0)
+        vim.api.nvim_win_set_cursor(0, { lines, 1 })
+
+        -- require("overseer.util").scroll_to_end(0)
       end,
       on_exit = function(self, _, code)
         local close = params.close_on_exit == "always"

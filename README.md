@@ -85,9 +85,11 @@ convienineces of neovim's lua ecosystem.
         Default: <code>true</code>
       </td>
       <td>
-        If this is <code>true</code>, each overseer task will use a base set of components.
-        Set this to false if you want to add your own components through the <code>components</code>
-        config value that will replace the base components.
+        If this is <code>true</code>, each overseer task will use a base set of
+        components. Set this to false if you want to add your own components
+        through the <code>components</code> config value that will replace the
+        base components. To see what components are added by default, look at
+        the `base_components` function in lua/officer/config.lua.
         <br />
         Warning: many aspects of the plugin expect the base components to be there.
         Setting this value to <code>false</code> may have unexpected results.

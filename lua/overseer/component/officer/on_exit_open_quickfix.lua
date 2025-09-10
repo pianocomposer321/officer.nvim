@@ -5,7 +5,7 @@ return {
       desc = "Command to run to open the quickfix list",
       type = "enum",
       choices = { "copen", "cwindow" },
-      default = "copen",
+      default = "cwindow",
     },
     height = {
       type = "integer",
@@ -15,7 +15,7 @@ return {
   constructor = function(params)
     return {
       on_exit = function()
-        local open_cmd = "botright " .. params.open_cmd
+        local open_cmd = "horizontal botright " .. params.open_cmd
         if params.height then
           open_cmd = open_cmd .. params.height
         end
