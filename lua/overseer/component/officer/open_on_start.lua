@@ -6,7 +6,7 @@ return {
     modifier = {
       desc = "Direction modifier for window created",
       type = "string",
-      default = "",
+      default = "botright vertical",
     },
     close_on_exit = {
       desc = "Close the window on exit",
@@ -17,6 +17,7 @@ return {
     size = {
       desc = "Size of the window to create",
       type = "opaque",
+      default = "default",
     },
   },
   constructor = function(params)
@@ -24,7 +25,7 @@ return {
       bufnr = nil,
       on_start = function(self, task)
         self.bufnr = task:get_bufnr()
-        oui.add_window_to_stack(self.bufnr)
+        oui.add_window_to_stack(self.bufnr, params.modifier, params.size)
         vim.api.nvim_win_set_buf(0, self.bufnr)
 
         -- vim.api.nvim_feedkeys("G", "n", false)
