@@ -55,7 +55,11 @@ return {
         close = close or (params.close_on_exit == "success" and code == 0)
         if close then
           oui.close_window(self.bufnr)
+          return
         end
+        vim.keymap.set("n", "q", function()
+          oui.close_window(self.bufnr)
+        end, { buffer = self.bufnr })
       end,
       on_reset = function(self)
         oui.close_window(self.bufnr)
