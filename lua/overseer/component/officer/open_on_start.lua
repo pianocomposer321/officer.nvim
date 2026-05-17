@@ -18,6 +18,15 @@ return {
       desc = "Size of the window to create",
       type = "opaque",
     },
+    window_opts = {
+      desc = "Window options to set after loading the buffer into the created window",
+      type = "opaque",
+      default = {
+        number = false,
+        relativenumber = false,
+        signcolumn = "no",
+      },
+    }
   },
   constructor = function(params)
     return {
@@ -28,6 +37,13 @@ return {
         vim.api.nvim_win_set_buf(0, self.bufnr)
 
         -- vim.api.nvim_feedkeys("G", "n", false)
+
+        for option, value in pairs(params.window_opts) do
+          vim.api.nvim_set_option_value(option, value, {
+            scope = "local",
+            win = oui.get_winid(self.bufnr),
+          })
+        end
 
         local lines = vim.api.nvim_buf_line_count(0)
         vim.api.nvim_win_set_cursor(0, { lines, 1 })
