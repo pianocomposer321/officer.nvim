@@ -15,14 +15,14 @@ function M.resize_windows_on_stack()
 end
 
 ---@param bufnr number
-function M.add_window_to_stack(bufnr)
+function M.add_window_to_stack(bufnr, modifier, size)
   local last_window = stack[#stack]
   if not last_window or not vim.api.nvim_win_is_valid(last_window.winid) then
-    M.create_window(bufnr, "botright vertical", get_size())
+    M.create_window(bufnr, modifier, size)
     return
   end
   vim.api.nvim_set_current_win(last_window.winid)
-  M.create_window(bufnr, "belowright")
+  M.create_window(bufnr, modifier, size)
   M.resize_windows_on_stack()
 end
 
@@ -45,10 +45,12 @@ end
 ---@param modifier string
 ---@param size? size|fun():size
 function M.create_window(bufnr, modifier, size)
-  if size == nil
-    then size = ""
+  if size == "default"
+  then
+    size = get_size()
   elseif type(size) == "function"
-    then size = size()
+  then
+    size = size()
   end
 
   local cmd = "split"
